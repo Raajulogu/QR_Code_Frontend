@@ -9,8 +9,9 @@ const api_url = asserts.backend_url;
 
 const Dashboard = () => {
   let navigate = useNavigate();
-  let [email, setEmail] = useState("");
-  let [content, setContent] = useState("");
+  let [price, setPrice] = useState("");
+  let [product, setProduct] = useState("");
+
   let [qrCode, setQrCode] = useState("");
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const Dashboard = () => {
 
   const generateQRCode = async () => {
     let token = localStorage.getItem("token");
-    if (!email || !content) {
+    if (!price || !product) {
       alert("Please fill All Fields");
       return false;
     }
@@ -30,8 +31,8 @@ const Dashboard = () => {
       const response = await axios.put(
         `${api_url}/user/get-qr-code`,
         {
-          email,
-          content,
+          price,
+          product,
         },
         {
           headers: {
@@ -39,7 +40,7 @@ const Dashboard = () => {
           },
         }
       );
-      let qrCode = await response.data; // No need for .qrCode property
+      let qrCode = await response.data; 
       setQrCode(qrCode);
     } catch (error) {
       console.error("Error In Fetching Data:", error);
@@ -51,19 +52,19 @@ const Dashboard = () => {
       <div className="home-box">
         <div className="input-field">
           <TextField
-            id="email"
-            label="Email"
+            id="price"
+            label="Price"
             variant="outlined"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
           />
           <br />
           <TextField
             id="outlined-basic"
-            label="Subject"
+            label="Product"
             variant="outlined"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            value={product}
+            onChange={(e) => setProduct(e.target.value)}
           />
           <br />
           <Button variant="contained" onClick={generateQRCode}>
