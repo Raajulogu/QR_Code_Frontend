@@ -9,8 +9,7 @@ const api_url = asserts.backend_url;
 
 const Dashboard = () => {
   let navigate = useNavigate();
-  let [price, setPrice] = useState("");
-  let [product, setProduct] = useState("");
+  let [url, setUrl] = useState("");
 
   let [qrCode, setQrCode] = useState("");
 
@@ -23,7 +22,7 @@ const Dashboard = () => {
 
   const generateQRCode = async () => {
     let token = localStorage.getItem("token");
-    if (!price || !product) {
+    if (!url) {
       alert("Please fill All Fields");
       return false;
     }
@@ -31,8 +30,7 @@ const Dashboard = () => {
       const response = await axios.put(
         `${api_url}/user/get-qr-code`,
         {
-          price,
-          product,
+          url
         },
         {
           headers: {
@@ -55,17 +53,11 @@ const Dashboard = () => {
             id="price"
             label="Price"
             variant="outlined"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
           />
           <br />
-          <TextField
-            id="outlined-basic"
-            label="Product"
-            variant="outlined"
-            value={product}
-            onChange={(e) => setProduct(e.target.value)}
-          />
+          
           <br />
           <Button variant="contained" onClick={generateQRCode}>
             Generate
