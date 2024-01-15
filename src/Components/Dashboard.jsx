@@ -50,8 +50,8 @@ const Dashboard = () => {
       <div className="home-box">
         <div className="input-field">
           <TextField
-            id="price"
-            label="Price"
+            id="url"
+            label="URL"
             variant="outlined"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
