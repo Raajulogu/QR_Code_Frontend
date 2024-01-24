@@ -49,6 +49,8 @@ const Dashboard = () => {
     <div className="home-container">
       <div className="home-box">
         <div className="input-field">
+          <h2>Please provide a Amazon product URL</h2>
+
           <TextField
             id="url"
             label="URL"
