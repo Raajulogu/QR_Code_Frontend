@@ -36,6 +36,7 @@ const SignUp = () => {
     try {
       let response = await axios.post(`${api_url}/user/signup`, user);
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("apiKey",response.data.apiKey);
       navigate("/");
     } catch (error) {
       alert("Singup error, please try later");

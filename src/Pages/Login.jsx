@@ -37,6 +37,7 @@ const Login = () => {
         user
       );
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("apiKey",response.data.apiKey);
       navigate("/");
     } catch {
       alert("Invalid Credentials");

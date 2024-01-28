@@ -9,46 +9,51 @@ const api_url = asserts.backend_url;
 
 const Dashboard = () => {
   let navigate = useNavigate();
-  let [url, setUrl] = useState("");
+  let [apiKey,setApiKey]=useState("")
+  // let [url, setUrl] = useState("");
 
-  let [qrCode, setQrCode] = useState("");
+  // let [qrCode, setQrCode] = useState("");
 
   useEffect(() => {
     let token = localStorage.getItem("token");
     if (!token) {
       navigate("/login", { replace: true });
     }
+    setApiKey(localStorage.getItem("apiKey"));
   }, []);
 
-  const generateQRCode = async () => {
-    let token = localStorage.getItem("token");
-    if (!url) {
-      alert("Please fill All Fields");
-      return false;
-    }
-    try {
-      const response = await axios.put(
-        `${api_url}/user/get-qr-code`,
-        {
-          url
-        },
-        {
-          headers: {
-            "x-auth": token,
-          },
-        }
-      );
-      let qrCode = await response.data; 
-      setQrCode(qrCode);
-    } catch (error) {
-      console.error("Error In Fetching Data:", error);
-    }
-  };
+  // const generateQRCode = async () => {
+  //   let token = localStorage.getItem("token");
+  //   if (!url) {
+  //     alert("Please fill All Fields");
+  //     return false;
+  //   }
+  //   try {
+  //     const response = await axios.put(
+  //       `${api_url}/user/get-qr-code`,
+  //       {
+  //         url
+  //       },
+  //       {
+  //         headers: {
+  //           "x-auth": token,
+  //         },
+  //       }
+  //     );
+  //     let qrCode = await response.data; 
+  //     setQrCode(qrCode);
+  //   } catch (error) {
+  //     console.error("Error In Fetching Data:", error);
+  //   }
+  // };
 
   return (
     <div className="home-container">
       <div className="home-box">
-        <div className="input-field">
+
+        <h1>Your API Key is</h1>
+        <h4>{apiKey}</h4>
+        {/* <div className="input-field">
           <h2>Please provide a Amazon product URL</h2>
 
           <TextField
@@ -68,7 +73,9 @@ const Dashboard = () => {
 
         <div className="outpu-data">
           <img src={qrCode} alt="QR Code" />
-        </div>
+        </div> */}
+
+
       </div>
     </div>
   );
